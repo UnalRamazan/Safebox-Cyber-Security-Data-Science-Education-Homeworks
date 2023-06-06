@@ -1,0 +1,55 @@
+Stored Procedure:
+Stored Procedure (Depolanmış Prosedür), veritabanında saklanan ve genellikle bir dizi SQL ifadesinden oluşan, adlandırılmış ve parametrelerle çağrılan bir işlevdir. İşte stored procedure'ların kullanımının nedenleri:
+
+Performans: Stored procedure'lar, veritabanı sunucusunda ön belleğe alınabilir ve daha hızlı çalıştırılabilir. Tek bir istemci tarafından birden fazla kez kullanılabilen bir kod bloğu olduğu için ağ trafiğini azaltabilirler.
+
+Veri Güvenliği: Stored procedure'lar, veritabanı erişimini kontrol etmek için kullanılabilir. Kullanıcıların doğrudan tablolara erişimini sınırlayarak, veri güvenliği sağlanabilir.
+
+Veritabanı Mantığı: Karmaşık işlemleri ve veritabanı mantığını bir araya getirmek için kullanılabilirler. Örneğin, birden fazla tabloya yazma işlemi gerçekleştiren bir işlem, tek bir stored procedure içinde tanımlanabilir.
+
+Kolay Bakım: Stored procedure'lar, veritabanı işlevselliğini merkezi bir yerde saklamayı sağlar. Bu, bakım ve güncelleme işlemlerini kolaylaştırır.
+
+Olumsuz Etkileri:
+
+Karmaşıklık: Stored procedure'lar, geliştirme sürecinde ve bakım aşamasında karmaşık hale gelebilir. Bu, kodun anlaşılmasını ve hataların izlenmesini zorlaştırabilir.
+
+Platform Bağımlılığı: Stored procedure'lar, veritabanı sunucusuna özgüdür. Farklı veritabanı sistemleri arasında taşınabilirlik sorunları olabilir.
+
+Trigger:
+Trigger (Tetikleyici), belirli bir olayın gerçekleşmesi durumunda otomatik olarak çalışan bir veritabanı nesnesidir. İşte trigger'ların kullanımının nedenleri:
+
+Veri Bütünlüğü: Trigger'lar, veritabanı içinde tanımlanan kuralları uygulamak için kullanılabilir. Örneğin, bir tabloya yeni bir kayıt eklendiğinde veya mevcut bir kayıt güncellendiğinde, trigger otomatik olarak belirli bir işlemi gerçekleştirebilir.
+
+Veri Denetimi: Trigger'lar, veri denetimi yapmak için kullanılabilir. Örneğin, bir tabloya eklenecek bir kaydın belirli bir kurala uyması gerekiyorsa, trigger bu kontrolü sağlayabilir.
+
+Veri İzleme: Trigger'lar, belirli olayları izlemek ve bu olaylar gerçekleştiğinde başka bir işlemi tetiklemek için kullanılabilir. Örneğin, bir tabloya yeni bir kayıt eklendiğinde, trigger diğer tablolara veri ekleyebilir veya güncelleyebilir.
+
+Olumsuz Etkileri:
+
+Performans: Yanlış yapılandırılmış trigger'lar, veritabanının performansını olumsuz etkileyebilir. Çünkü her tetikleyici çalıştığında, ilgili işlem gerçekleştirilmelidir.
+
+Zor Bakım: Karmaşık trigger'lar, izlenmesi ve sürdürülmesi zor olabilir. Birden fazla trigger'ın etkileşimini yönetmek karmaşıklığa neden olabilir.
+
+Python ile Stored Procedure ve Trigger'ları Kullanma:
+Python ile veritabanına bağlandıktan sonra stored procedure veya trigger'ı çağırmak için kullanabileceğiniz birçok veritabanı modülü bulunmaktadır. Örneğin, Python için popüler bir modül olan "psycopg2" ile PostgreSQL veritabanında stored procedure veya trigger'ı çağırabilirsiniz.
+
+Örnek:
+import psycopg2
+
+# Veritabanına bağlanma
+conn = psycopg2.connect(database="mydatabase", user="myuser", password="mypassword", host="localhost", port="5432")
+
+# Cursor oluşturma
+cur = conn.cursor()
+
+# Stored Procedure'ı çağırma
+cur.callproc('StockCheck', (product_id,))
+
+# Sonuçları almak için fetchall kullanabilirsiniz
+results = cur.fetchall()
+
+# Bağlantıyı kapatma
+cur.close()
+conn.close()
+
+Bu örnekte, conn ile veritabanına bağlanıyor, cur ile bir cursor oluşturuyoruz. cur.callproc() fonksiyonunu kullanarak StockCheck adındaki stored procedure'ı çağırıyoruz ve gerekli parametreleri sağlıyoruz. Ardından, cur.fetchall() ile sonuçları alıyoruz ve bağlantıyı kapatıyoruz.

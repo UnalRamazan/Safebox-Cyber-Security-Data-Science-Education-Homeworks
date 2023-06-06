@@ -1,0 +1,19 @@
+Analitik SQL, büyük veri setlerini analiz etmek, trendleri belirlemek, desenleri keşfetmek ve özet istatistikler elde etmek için kullanılan SQL sorgularını ifade eder. 
+Bu tür sorgular, iş zekası, veri analitiği ve raporlama gibi alanlarda yaygın olarak kullanılır. 
+Analitik sorgular, veriler üzerinde derinlemesine analiz yapmayı sağlar ve büyük veri setlerinde trendleri, desenleri ve ilişkileri keşfetmek için idealdir. 
+Aynı zamanda özet istatistikler hesaplamak, segmentlere ayrılmış verileri analiz etmek ve genel olarak veri odaklı kararlar almak için kullanılır. 
+Bu tür sorgular, işletmelerin verilerini daha iyi anlamalarını sağlar ve karar verme süreçlerinde önemli bilgiler sunar. 
+Analitik sorguları kullanarak, satış performansını analiz edebilir, müşteri davranışlarını anlayabilir, pazar trendlerini takip edebilir ve işletme hedeflerini destekleyen stratejik kararlar alabilirsiniz. 
+Veri analizi ve raporlama süreçlerinde analitik SQL'nin gücü, verilerin anlamlı bir şekilde yorumlanmasına ve işletmenin rekabet avantajını artırmasına yardımcı olur.
+
+WITH top_customers AS (
+    SELECT customer_id, SUM(order_total) AS total_spent
+    FROM orders
+    GROUP BY customer_id
+    ORDER BY total_spent DESC
+    LIMIT 10
+)
+
+SELECT customers.customer_name, top_customers.total_spent
+FROM top_customers
+JOIN customers ON top_customers.customer_id = customers.customer_id;
